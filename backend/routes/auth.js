@@ -14,7 +14,10 @@ router.post("/", [
       return res.status(400).json({ errors: errors.array() });
     }
     
-    console.log(req.body);
+    User.create({
+      username: req.body.username,
+      password: req.body.password,
+    }).then((user) => res.json(user));
     res.send(req.body);
 });
 
