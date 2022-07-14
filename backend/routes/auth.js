@@ -4,6 +4,7 @@ const User = require("../models/User");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+var fetchuser = require("../middleware/fetchuser");
 
 const JWT_SECRET="Nadiaisasupersecret";
 
@@ -95,8 +96,11 @@ router.post(
     // Route 3 ---Get logedin user details using : POST "/api/auth/getuser". Login required
     router.post("/getuser", async (req, res) => {
       try {
-        userId = "todo";
-        const user = await User.findById(userId).select("-password");
+        const user = await User.findById(req.user.id);
+
+        //  = req.user.id;
+        // const user = await User.findById(userId).select("-password");
+        res.send(user);
       } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error");
