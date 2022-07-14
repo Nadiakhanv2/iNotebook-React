@@ -31,9 +31,7 @@ router.post(
       email: req.body.email,
     });
 res.json(user);
-    //     .then((user) => res.json(user))
-    //   .catch(err => { console.log(err) })
-    // res.json({err : 'please enter a unique value for emial' , message: 'err.message'})
+   
   }
 );
 
