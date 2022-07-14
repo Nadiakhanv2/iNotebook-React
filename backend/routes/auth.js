@@ -56,7 +56,7 @@ router.post(
     // Authenticate a user using : POST "/api/auth/login". Doesn't require authentication.no login required
 
 router.post(
-  "/createuser",
+  "/login",
   [
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password cannot be empty").exists(),
@@ -71,7 +71,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ msg: "Please try to login with correct credentials" });       
+          .json({ msg: "Please try to login with correct credentials" });
       }
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
@@ -79,12 +79,14 @@ router.post(
           .status(400)
           .json({ msg: "Please try to login with correct credentials" });
       }
-       const data = {
-         id: user._id,
-       };
-
+      const data = {
+        id: user._id,
+      };
+      const authtoken = jwt.sign(data, JWT_SECRET);
+      res.json(authtoken);
     } catch (error) {
-
+      console.error(error.message);
+      res.status(500).send("Server Error");
     }
 
   })
