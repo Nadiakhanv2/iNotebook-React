@@ -10,7 +10,7 @@ const JWT_SECRET="Nadiaisasupersecret";
 
 // Route 2 ---Create a user using : POST "/api/auth/createuser". Doesn't require authentication.no login required
 router.post(
-  "/createuser",
+  "/createuser", fetchuser ,
   [
     body("name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
