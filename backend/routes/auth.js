@@ -15,10 +15,12 @@ router.post("/", [
     }
     
     User.create({
-      username: req.body.username,
+      name: req.body.name,
       password: req.body.password,
-    }).then((user) => res.json(user));
-    res.send(req.body);
+      email: req.body.email
+    }).then((user) => res.json(user))
+    .catch(err => { console.log(err) })
+  res.json({err : 'please enter a unique value for emial' , message: 'err.message'})
 });
 
 module.exports = router;
