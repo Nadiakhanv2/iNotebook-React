@@ -1,6 +1,6 @@
 const express = require("express");
 var fetchuser = require("../middleware/fetchuser");
-const Notes = require("../models/Notes");
+const Note = require("../models/Note");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
@@ -21,7 +21,7 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
 
 // Route 2 ---Add a new note using : POST "/api/auth/addnote". Login required
 
-router.get(
+router.post(
   "/addnote",
   fetchuser,
   [
