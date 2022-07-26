@@ -21,5 +21,5 @@ app.use('/api/auth', require('./routes/auth'));
 //   res.send("Hello signup!");
 // });
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`iNotebook backend listening on port ${port}`);
 });
